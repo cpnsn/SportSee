@@ -2,27 +2,54 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchUser } from "../api/fetchUser";
 
-function Profil() {
+export default function Profil() {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ data: {} });
 
   useEffect(() => {
-    async function getUser() {
-      try {
-        const userData = await fetchUser(id);
-        setUser(userData);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    }
-    getUser();
+    fetchUser(id)
+      .then((userData) => setUser(userData))
+      .catch((error) => console.error("Error fetching user:", error));
   }, [id]);
 
   return (
-    <div>
-      <p className="text-violet-800 text-3xl">{user.data.id}</p>
+    <div className="flex h-full">
+      <div className="relative bg-black text-white w-fit p-6 flex flex-col justify-center h-[91vh]">
+        <img
+          className="mb-4 w-[50px]"
+          src={"/icons/sports/meditation.svg"}
+          alt="meditation icon"
+        />
+        <img
+          className="mb-4 w-[50px]"
+          src={"/icons/sports/swimming.svg"}
+          alt="swimming icon"
+        />
+        <img
+          className="mb-4 w-[50px]"
+          src={"/icons/sports/cycling.svg"}
+          alt="cycling icon"
+        />
+        <img
+          className="w-[50px]"
+          src={"/icons/sports/workout.svg"}
+          alt="workout icon"
+        />
+
+        <span className="rotate-[-90deg] text-xs absolute bottom-24 left-1/2 -translate-x-1/2 w-max">
+          Copyright SportSee 2024
+        </span>
+      </div>
+
+      <div className="py-16 px-20">
+        <h1 className="text-4xl font-[Roboto-Medium] mb-8">
+          Bonjour{" "}
+          <span className="text-[#FF0000]">
+            {user.data.userInfos.firstName}
+          </span>
+        </h1>
+        <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+      </div>
     </div>
   );
 }
-
-export default Profil;

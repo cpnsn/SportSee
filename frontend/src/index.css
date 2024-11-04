@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/public/fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: "Roboto-Medium";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/public/fonts/Roboto/Roboto-Medium.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: "Roboto-Bold";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/public/fonts/Roboto/Roboto-Bold.ttf) format("truetype");
+  }
+}
+
 /* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
