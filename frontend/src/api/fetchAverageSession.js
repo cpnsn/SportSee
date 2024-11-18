@@ -1,5 +1,5 @@
-export async function fetchUser(userId) {
-    let url = `http://localhost:3000/user/${userId}`;
+export async function fetchAverageSession(userId) {
+    let url = `http://localhost:3000/user/${userId}/average-sessions`;
   
     const response = await fetch(url);
       if (!response.ok) {
@@ -10,3 +10,4 @@ export async function fetchUser(userId) {
       return json;
   
   }
+  
