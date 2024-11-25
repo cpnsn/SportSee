@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import { fetchUser } from "../api/fetchUser";
 import { fetchUserActivity } from "../api/fetchUserActivity";
 import { fetchAverageSession } from "../api/fetchAverageSession";
+import { fetchPerformance } from "../api/fetchPerformance";
 import DailyActivityChart from "../components/charts/DailyActivityChart";
 import AverageSessionChart from "../components/charts/AverageSessionChart";
+import PerformanceChart from "../components/charts/PerformanceChart";
+import ScoreChart from "../components/charts/ScoreChart";
 import KeyFigures from "../components/KeyFigures";
 
 export default function Profil() {
@@ -18,10 +21,12 @@ export default function Profil() {
         carbohydrateCount: null,
         lipidCount: null,
       },
+      todayScore: null,
     },
   });
   const [activity, setUserActivity] = useState([]);
   const [averageSession, setAverageSession] = useState([]);
+  const [performance, setPerformance] = useState([]);
 
   useEffect(() => {
     fetchUser(id)
@@ -35,6 +40,10 @@ export default function Profil() {
     fetchAverageSession(id)
       .then((sessionData) => setAverageSession(sessionData.data.sessions))
       .catch((error) => console.error("Error fetching session:", error));
+
+    fetchPerformance(id)
+      .then((perfData) => setPerformance(perfData.data))
+      .catch((error) => console.error("Error fetching performance:", error));
   }, [id]);
 
   return (
@@ -82,17 +91,23 @@ export default function Profil() {
               <p className="absolute pb-10">Activité quotidienne</p>
               <DailyActivityChart activity={activity} />
             </div>
-            <div className="flex jusify-between">
-              <div className="rounded-md overflow-hidden relative h-[350px] w-[350px]">
+            <div className="flex justify-between">
+              <div className="rounded-md overflow-hidden relative h-[350px] w-[31%]">
                 <p className="absolute pb-10 z-10 text-white opacity-50 ml-6 mt-6">
                   Durée moyenne des
                   <br /> sessions
                 </p>
                 <AverageSessionChart averageSession={averageSession} />
               </div>
+              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[350px] w-[31%]">
+                <PerformanceChart performance={performance} />
+              </div>
+              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[350px] w-[31%]">
+                <ScoreChart user={user} />
+              </div>
             </div>
           </div>
-          <div className="w-[27%]">
+          <div className="w-[27%] flex flex-col justify-between">
             <KeyFigures
               icon="/icons/key_figures/calories.svg"
               color="bg-redChart bg-opacity-[6.61%]"
