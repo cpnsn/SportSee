@@ -87,7 +87,7 @@ export default function Profil() {
 
         <div className="flex justify-between w-full">
           <div className="flex flex-col w-[70%] h-full">
-            <div className="bg-lightGrey mb-10 rounded-md py-6 pl-8 relative h-[350px] w-full">
+            <div className="bg-lightGrey mb-10 rounded-md py-6 pl-8 relative h-[400px] w-full">
               <p className="absolute pb-10">Activité quotidienne</p>
               <DailyActivityChart activity={activity} />
             </div>

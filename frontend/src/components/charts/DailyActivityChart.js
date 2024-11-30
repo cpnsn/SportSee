@@ -16,15 +16,15 @@ const DailyActivityChart = ({ activity }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
-        width={500}
-        height={300}
+        width={450}
+        height={600}
         data={activity}
         barSize={10}
         margin={{
           top: 5,
           right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 20,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -32,11 +32,31 @@ const DailyActivityChart = ({ activity }) => {
           dataKey="day"
           tickFormatter={(_, index) => index + 1}
           tickLine={false}
+          axisLine={{ stroke: "#9B9EAC" }}
+          tick={{ fill: "#9B9EAC" }}
+          dy={20}
         />
 
-        <YAxis orientation="right" axisLine={false} tickLine={false} />
+        <YAxis
+          orientation="right"
+          axisLine={false}
+          tickLine={false}
+          tick={{ fill: "#9B9EAC" }}
+          dx={20}
+        />
         <Tooltip content={<CustomChartTooltip />} />
-        <Legend verticalAlign="top" align="right" />
+        <Legend
+          verticalAlign="top"
+          align="right"
+          iconType="circle"
+          iconSize={10}
+          wrapperStyle={{ paddingBottom: "60px" }}
+          formatter={(value) => {
+            if (value === "kilogram") return "Poids (kg)";
+            if (value === "calories") return "Calories brûlées (kCal)";
+            return value;
+          }}
+        />
         <Bar
           dataKey="kilogram"
           fill="#000000"

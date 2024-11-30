@@ -28,6 +28,22 @@
   }
 }
 
+.recharts-legend-item {
+  margin-left: 30px !important;
+}
+
+.recharts-legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.recharts-legend-item span {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #74798C !important;
+}
+
 /* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
