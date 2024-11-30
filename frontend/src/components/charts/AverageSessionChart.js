@@ -15,13 +15,13 @@ const AverageSessionChart = ({ averageSession }) => {
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
         width={500}
-        height={300}
+        height={350}
         data={averageSession}
         margin={{
           top: 0,
           right: 0,
           left: 0,
-          bottom: 30,
+          bottom: 0,
         }}
       >
         <ReferenceArea
