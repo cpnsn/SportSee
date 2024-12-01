@@ -18,7 +18,7 @@ const ScoreChart = ({ user }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "350px",
+        height: "320px",
       }}
     >
       <h2 className="absolute top-8 left-10">Score</h2>

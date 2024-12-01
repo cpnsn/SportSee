@@ -92,17 +92,17 @@ export default function Profil() {
               <DailyActivityChart activity={activity} />
             </div>
             <div className="flex justify-between">
-              <div className="rounded-md overflow-hidden relative h-[350px] w-[31%]">
+              <div className="rounded-md overflow-hidden relative h-[320px] w-[31%]">
                 <p className="absolute pb-10 z-10 text-white opacity-50 ml-6 mt-6">
                   Durée moyenne des
                   <br /> sessions
                 </p>
                 <AverageSessionChart averageSession={averageSession} />
               </div>
-              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[350px] w-[31%]">
+              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[320px] w-[31%]">
                 <PerformanceChart performance={performance} />
               </div>
-              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[350px] w-[31%]">
+              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[320px] w-[31%]">
                 <ScoreChart user={user} />
               </div>
             </div>
