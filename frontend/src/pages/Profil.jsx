@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchUser } from "../api/fetchUser";
-import { fetchUserActivity } from "../api/fetchUserActivity";
-import { fetchAverageSession } from "../api/fetchAverageSession";
-import { fetchPerformance } from "../api/fetchPerformance";
+import { fetchAllUserData } from "../api/fetchData";
 import DailyActivityChart from "../components/charts/DailyActivityChart";
 import AverageSessionChart from "../components/charts/AverageSessionChart";
 import PerformanceChart from "../components/charts/PerformanceChart";
@@ -29,21 +26,19 @@ export default function Profil() {
   const [performance, setPerformance] = useState([]);
 
   useEffect(() => {
-    fetchUser(id)
-      .then((userData) => setUser(userData))
-      .catch((error) => console.error("Error fetching user:", error));
-
-    fetchUserActivity(id)
-      .then((activityData) => setUserActivity(activityData.data.sessions))
-      .catch((error) => console.error("Error fetching activity:", error));
-
-    fetchAverageSession(id)
-      .then((sessionData) => setAverageSession(sessionData.data.sessions))
-      .catch((error) => console.error("Error fetching session:", error));
-
-    fetchPerformance(id)
-      .then((perfData) => setPerformance(perfData.data))
-      .catch((error) => console.error("Error fetching performance:", error));
+    const fetchData = async () => {
+      try {
+        const result = await fetchAllUserData(id);
+        const { user, activity, averageSessions, performance } = result;
+        setUser(user);
+        setUserActivity(activity.data.sessions);
+        setAverageSession(averageSessions.data.sessions);
+        setPerformance(performance.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchData();
   }, [id]);
 
   return (
@@ -74,7 +69,7 @@ export default function Profil() {
         </span>
       </div>
 
-      <div className="py-16 pl-32 pr-20 w-full">
+      <div className="py-16 px-8 xl:pl-32 xl:pr-20 min-[2000px]:px-[20%] w-full">
         <h1 className="text-4xl font-[Roboto-Medium] mb-8">
           Bonjour{" "}
           <span className="text-[#FF0000]">
@@ -92,17 +87,17 @@ export default function Profil() {
               <DailyActivityChart activity={activity} />
             </div>
             <div className="flex justify-between">
-              <div className="rounded-md overflow-hidden relative h-[320px] w-[31%]">
+              <div className="rounded-md overflow-hidden relative h-[200px] xl:h-[260px] 2xl:h-[320px] w-[31%]">
                 <p className="absolute pb-10 z-10 text-white opacity-50 ml-6 mt-6">
                   Durée moyenne des
                   <br /> sessions
                 </p>
                 <AverageSessionChart averageSession={averageSession} />
               </div>
-              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[320px] w-[31%]">
+              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[200px] xl:h-[260px] 2xl:h-[320px] w-[31%]">
                 <PerformanceChart performance={performance} />
               </div>
-              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[320px] w-[31%]">
+              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[200px] xl:h-[260px] 2xl:h-[320px] w-[31%]">
                 <ScoreChart user={user} />
               </div>
             </div>
