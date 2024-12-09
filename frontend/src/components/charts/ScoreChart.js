@@ -2,7 +2,7 @@ import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
 const ScoreChart = ({ user }) => {
-  const score = user?.data?.todayScore ?? user?.data?.score ?? 0;
+  const score = user?.todayScore ?? 0;
 
   const scoreData = [
     { name: "Completed", value: score },
@@ -22,7 +22,10 @@ const ScoreChart = ({ user }) => {
       }}
     >
       <h2 className="absolute top-8 left-10">Score</h2>
-      <div className="flex justify-center align-center" style={{ position: "relative" }}>
+      <div
+        className="flex justify-center align-center"
+        style={{ position: "relative" }}
+      >
         {/* personnalisation couleur intérieure */}
         <svg width={200} height={200} style={{ position: "absolute" }}>
           <circle cx="100" cy="100" r="88" fill="#fff" />
