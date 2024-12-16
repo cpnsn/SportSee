@@ -71,28 +71,28 @@ export default function Profil() {
           Félicitations ! Vous avez explosé vos objectifs hier 👏
         </p>
 
-        <div className="flex justify-between w-full">
-          <div className="flex flex-col w-[70%] h-full">
+        <div className="xl:flex justify-between w-full">
+          <div className="flex flex-col xl:w-[70%] h-full mb-10 xl:mb-0">
             <div className="bg-lightGrey mb-10 rounded-md py-6 pl-8 relative h-[400px] w-full">
               <p className="absolute pb-10">Activité quotidienne</p>
               <DailyActivityChart activity={userData.activity} />
             </div>
             <div className="flex justify-between">
-              <div className="rounded-md overflow-hidden relative h-[200px] xl:h-[260px] 2xl:h-[320px] w-[31%]">
+              <div className="rounded-md overflow-hidden relative h-[260px] 2xl:h-[320px] w-[31%]">
                 <p className="absolute pb-10 z-10 text-white opacity-50 ml-6 mt-6">
                   Durée moyenne des<br /> sessions
                 </p>
                 <AverageSessionChart averageSession={userData.averageSessions} />
               </div>
-              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[200px] xl:h-[260px] 2xl:h-[320px] w-[31%]">
+              <div className="rounded-md bg-[#282D30] overflow-hidden relative h-[260px] 2xl:h-[320px] w-[31%]">
                 <PerformanceChart performance={userData.performance} />
               </div>
-              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[200px] xl:h-[260px] 2xl:h-[320px] w-[31%]">
+              <div className="rounded-md bg-lightGrey overflow-hidden relative h-[260px] 2xl:h-[320px] w-[31%]">
                 <ScoreChart user={userData} />
               </div>
             </div>
           </div>
-          <div className="w-[27%] flex flex-col justify-between">
+          <div className="xl:w-[27%] flex xl:flex-col justify-between">
             <KeyFigures
               icon="/icons/key_figures/calories.svg"
               color="bg-redChart bg-opacity-[6.61%]"

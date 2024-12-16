@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { PieChart, Pie, Cell } from "recharts";
 
 const ScoreChart = ({ user }) => {
@@ -67,6 +68,12 @@ const ScoreChart = ({ user }) => {
       </div>
     </div>
   );
+};
+
+ScoreChart.propTypes = {
+  user: PropTypes.shape({
+    todayScore: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default ScoreChart;

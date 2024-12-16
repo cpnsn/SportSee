@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Radar,
   RadarChart,
@@ -39,6 +40,18 @@ const PerformanceChart = ({ performance }) => {
       </RadarChart>
     </ResponsiveContainer>
   );
+};
+
+PerformanceChart.propTypes = {
+  performance: PropTypes.shape({
+    kind: PropTypes.objectOf(PropTypes.string).isRequired,
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.number.isRequired,
+        kind: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
 };
 
 export default PerformanceChart;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CustomAverageChartTooltip from "../customAverageChartTooltip";
 import {
   LineChart,
@@ -8,6 +9,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+
+const getDayLetter = (day) => {
+  const days = ["L", "M", "M", "J", "V", "S", "D"];
+  return days[day - 1];
+};
 
 const AverageSessionChart = ({ averageSession }) => {
   return (
@@ -36,23 +42,27 @@ const AverageSessionChart = ({ averageSession }) => {
           dataKey="day"
           axisLine={false}
           tickLine={false}
-          dy={-30}
-          tick={{ fill: "#fff", opacity: 0.5 }}
-          ticks={averageSession.map(item => item.day)}
-          tickFormatter={(value) => {
-            switch (value) {
-              case 1: return "L";
-              case 2: return "M";
-              case 3: return "M";
-              case 4: return "J";
-              case 5: return "V";
-              case 6: return "S";
-              case 7: return "D";
-              default: return value;
-            }
+          tick={({ x, y, index }) => {
+            const day = averageSession[index].day;
+            let xOffset = 0;
+            if (index === 0) xOffset = 10;
+            if (index === averageSession.length - 1) xOffset = -10;
+            return (
+              <text
+                x={x + xOffset}
+                y={y}
+                dy={-30}
+                textAnchor="middle"
+                fill="#fff"
+                opacity={0.5}
+                fontSize={14}
+              >
+                {getDayLetter(day)}
+              </text>
+            );
           }}
           interval={0}
-          tickMargin={10}
+          tickMargin={30}
         />
 
         <YAxis hide={true} domain={["dataMin - 20", "dataMax + 20"]} />
@@ -70,6 +80,15 @@ const AverageSessionChart = ({ averageSession }) => {
       </LineChart>
     </ResponsiveContainer>
   );
+};
+
+AverageSessionChart.propTypes = {
+  averageSession: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.number.isRequired,
+      sessionLength: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default AverageSessionChart;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CustomChartTooltip from "../CustomChartTooltip";
 import {
   BarChart,
@@ -72,6 +73,16 @@ const DailyActivityChart = ({ activity }) => {
       </BarChart>
     </ResponsiveContainer>
   );
+};
+
+DailyActivityChart.propTypes = {
+  activity: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.string.isRequired,
+      kilogram: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default DailyActivityChart;
