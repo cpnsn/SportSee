@@ -1,4 +1,4 @@
-export default function CustomAverageChartTooltip({ active, payload, label }) {
+export default function CustomAverageChartTooltip({ active, payload }) {
   if (active && payload && payload.length) {
     return (
       <div

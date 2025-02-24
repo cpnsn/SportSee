@@ -76,6 +76,12 @@ const AverageSessionChart = ({ averageSession }) => {
           strokeLinecap="round"
           strokeWidth={1.5}
           dot={false}
+          activeDot={{
+            r: 4,
+            fill: "#fff",
+            stroke: "rgba(255, 255, 255, 0.3)",
+            strokeWidth: 10,
+          }}
         />
       </LineChart>
     </ResponsiveContainer>
